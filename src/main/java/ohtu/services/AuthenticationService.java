@@ -12,11 +12,18 @@ public class AuthenticationService {
     public AuthenticationService(UserDao userDao) {
         this.userDao = userDao;
     }
+    
+    public boolean checkUser(String username, String password, User user) {
+        if (user.getUsername().equals(username)
+                    && user.getPassword().equals(password)) {
+            return true;
+        }
+        return false;
+    }
 
     public boolean logIn(String username, String password) {
         for (User user : userDao.listAll()) {
-            if (user.getUsername().equals(username)
-                    && user.getPassword().equals(password)) {
+            if (checkUser(username, password, user)) {
                 return true;
             }
         }
