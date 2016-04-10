@@ -44,16 +44,18 @@ public class AuthenticationService {
 
         return true;
     }
-
-    private boolean invalid(String username, String password) {
-        // validity check of username and password
-        /*
-        käyttäjätunnuksen on oltava merkeistä a-z koostuva vähintään 3 merkin pituinen merkkijono, joka ei ole vielä käytössä
-        salasanan on oltava pituudeltaan vähintään 8 merkkiä ja sen tulee sisältää vähintään yksi numero tai erikoismerkki
-        */
+    
+    private boolean invalidUserLoginOrPasswordLength(String username, String password) {
         if (username.length() < 3) return true;
         
         if (password.length() < 8) return true;
+        
+        return false;
+    }
+
+    private boolean invalid(String username, String password) {
+        // validity check of username and password
+        if (invalidUserLoginOrPasswordLength(username, password)) return true;
         
         if (password.matches ("[a-zA-Z]+")) return true;
 
