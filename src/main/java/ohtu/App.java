@@ -24,32 +24,40 @@ public class App {
         userPwd[1] = io.readLine("password:");
         return userPwd;
     }
+    
+    public void commands(String command) {
+        if (command.equals("new")) {
+            addNewUserCmd();
+        } else if (command.equals("login")) {
+            loginUserCmd();
+        }
+    }
+    
+    public void addNewUserCmd() {
+        String[] usernameAndPasword = ask();
+        if (auth.createUser(usernameAndPasword[0], usernameAndPasword[1])) {
+            io.print("new user registered");
+        } else {
+            io.print("new user not registered");
+        }
+    }
+    
+    public void loginUserCmd() {
+        String[] usernameAndPasword = ask();
+        if (auth.logIn(usernameAndPasword[0], usernameAndPasword[1])) {
+            io.print("logged in");
+        } else {
+            io.print("wrong username or password");
+        }
+    }
 
     public void run() {
         while (true) {
             String command = io.readLine(">");
-
             if (command.isEmpty()) {
                 break;
             }
-
-            if (command.equals("new")) {
-                String[] usernameAndPasword = ask();
-                if (auth.createUser(usernameAndPasword[0], usernameAndPasword[1])) {
-                    io.print("new user registered");
-                } else {
-                    io.print("new user not registered");
-                }
-
-            } else if (command.equals("login")) {
-                String[] usernameAndPasword = ask();
-                if (auth.logIn(usernameAndPasword[0], usernameAndPasword[1])) {
-                    io.print("logged in");
-                } else {
-                    io.print("wrong username or password");
-                }
-            }
-
+            commands(command);
         }
     }
 
