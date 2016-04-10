@@ -24,9 +24,9 @@
             <property name="tokens" value="CLASS_DEF,INTERFACE_DEF"/>
         </module>
         
-        <!--<module name="CyclomaticComplexity">
+        <module name="CyclomaticComplexity">    
             <property name="max" value="3"/>
-        </module>-->
+        </module>
         
     </module>
     
